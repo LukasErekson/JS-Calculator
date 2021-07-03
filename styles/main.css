@@ -1,0 +1,110 @@
+body {
+    font-size: 20px;
+  }
+  
+  #current-op-str {
+    font-size: 25px;
+  
+  }
+  
+  #calc-wrapper {
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: 325px;
+    height: 450px;
+    padding: 5px;
+    margin: auto;
+    display: grid;
+    grid-template-areas: "display display display display"
+                         "numpad numpad numpad oppad";
+    grid-gap: 0px;
+  }
+  
+  #calc-display {
+    border: 1px solid black;
+    border-radius: 25px;
+    background-color: white;
+    width: 90%;
+    height: 64px;
+    text-align: right;
+    margin: auto;
+    padding: 5px;
+    grid-area: display;
+    display: grid;
+    align-items: center;
+  }
+  
+  #current-operation {
+    padding: 5px;
+  }
+  
+  #numpad {
+    grid-area: numpad;
+    display: grid;
+    grid-template-areas: "one two three"
+                         "four five six"
+                         "seven eight nine"
+                         "zero zero decimal";
+    grid-gap: 0px;
+  }
+  
+  .numpad-num {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: 5px;
+    background-color: #f0f0f0;
+    text-align: center;
+    display: grid;
+    align-items: center;
+  }
+  
+  #num-1 {
+    grid-area: one;
+  }
+  
+  #num-2 {
+    grid-area: two;
+  }
+  
+  #num-3 {
+    grid-area: three;
+  }
+  
+  #num-4 {
+    grid-area: four;
+  }
+  
+  #num-5 {
+    grid-area: five;
+  }
+  
+  #num-6 {
+    grid-area: six;
+  }
+  
+  #num-7 {
+    grid-area: seven;
+  }
+  
+  #num-8 {
+    grid-area: eight;
+  }
+  
+  #num-9 {
+    grid-area: nine;
+  }
+  
+  #num-0 {
+    grid-area: zero;
+  }
+  
+  #decimal {
+    grid-area: decimal;
+  }
+  
+  #operation-pad {
+    display: grid;
+    grid-area: oppad;
+  }
