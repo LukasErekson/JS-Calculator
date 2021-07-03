@@ -73,6 +73,9 @@ function updateDisplay(event) {
         if (!lastWasOperator) {
           // Run Calculations
           let valueArray = displayStr.innerText.split(' ');
+          if (valueArray.length < 3) {
+            break;
+          }
           let newValue = operate(valueArray[1], valueArray[0], valueArray[2]);
           let strValue = (newValue < 0 ? '-' : '') + String(Math.abs(newValue));
           console.log(newValue);
@@ -108,6 +111,7 @@ function updateDisplay(event) {
 
 /**
  * Finds the first operator in the string to assign as the operator.
+ * @returns {String or Number} The operator if one is found, otherwise returns -1.
  */
 function findOperator() {
   let displayText = displayStr.innerText;
@@ -115,6 +119,7 @@ function findOperator() {
     if (displayText[i] !== '.' && isNaN(parseFloat(displayText[i]))) {
       return displayText[i];
     }
+    return -1;
   }
 }
 
