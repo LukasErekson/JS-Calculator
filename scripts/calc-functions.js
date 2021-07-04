@@ -140,6 +140,20 @@ function evalEquals() {
 
 }
 
+/**
+ * Process the key presses to work with the rest of the code.
+ * @param {Event} event The keypress event.
+ */
+function processKeyPress(event) {
+  let pressedKey = {target : {innerText : `${event.key}`}}
+  // Also let enter evaluate the expression.
+  if (event.key === 'Enter') {
+    pressedKey.target.innerText = '=';
+  }
+  updateDisplay(pressedKey);
+
+}
+
 let buttons = Array.from(document.querySelectorAll('.numpad-num'));
 
 buttons.forEach((item) => item.addEventListener('click', updateDisplay));
@@ -147,4 +161,6 @@ buttons.forEach((item) => item.addEventListener('click', updateDisplay));
 let decimalInUse = false;
 let lastWasOperator = false;
 let operatorInput = false;
+
+document.addEventListener('keypress', processKeyPress);
 
