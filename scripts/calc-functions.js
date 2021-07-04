@@ -63,7 +63,6 @@ function updateDisplay(event) {
       case ".":
         if (!decimalInUse) {
           if (lastWasOperator || displayStr.innerText === "") {
-            console.log(displayStr.innerText);
             displayStr.innerText += " 0" + value;
             lastWasOperator = false;
           }
@@ -78,7 +77,6 @@ function updateDisplay(event) {
         lastWasOperator = false;
         break;
       case "=":
-        console.log(lastWasOperator);
         if (!lastWasOperator) {
           evalEquals();
         }
@@ -109,6 +107,10 @@ function updateDisplay(event) {
     }
     lastWasOperator = false;
   }
+
+  if (displayStr.innerText.length > 12) {
+    displayStr.style.fontSize = "10pt";
+  }
 }
 
 /**
@@ -121,6 +123,13 @@ function evalEquals() {
   if (valueArray.length < 3) {
     return; // Do nothing
   }
+
+  if (valueArray[1] === '/' && +valueArray[2] === 0) {
+    alert("Dividing by 0 is not well defined. If we defined it, then we would run into inconsistencies in arithmetic. This would be VERY BAD. Consider yourself warned.");
+    displayStr.innerText = displayStr.innerText.slice(0, valueArray[0].length + 1);
+    return;
+  }
+
   let newValue = operate(valueArray[1], valueArray[0], valueArray[2]).toFixed(9);
   let strValue = (newValue < 0 ? '-' : '') + String(Math.abs(newValue));
 

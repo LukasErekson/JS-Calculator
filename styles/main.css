@@ -59,6 +59,10 @@ body {
     display: grid;
     align-items: center;
   }
+
+  .numpad-num:hover {
+    background-color: #ccc;
+  }
   
   #num-1 {
     grid-area: one;
