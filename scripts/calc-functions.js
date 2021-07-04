@@ -71,20 +71,7 @@ function updateDisplay(event) {
       case "=":
         console.log(lastWasOperator);
         if (!lastWasOperator) {
-          // Run Calculations
-          let valueArray = displayStr.innerText.split(' ');
-          if (valueArray.length < 3) {
-            break;
-          }
-          let newValue = operate(valueArray[1], valueArray[0], valueArray[2]);
-          let strValue = (newValue < 0 ? '-' : '') + String(Math.abs(newValue));
-          console.log(newValue);
-          console.log(strValue);
-          // TODO : Still a bit buggy.
-          // Remove the numbers and operators associated with the last operation.
-          displayStr.innerText = displayStr.innerText.replace(valueArray[1], '');
-          displayStr.innerText = displayStr.innerText.replace(valueArray[0], strValue);
-          displayStr.innerText = displayStr.innerText.replace(valueArray[2], '');
+          evalEquals();
         }
         break;
       default:
@@ -93,6 +80,12 @@ function updateDisplay(event) {
           // Reset the decimal for the other number.
           decimalInUse = false;
           lastWasOperator = true;
+          if (operatorInput) {
+            evalEquals();
+          }
+          else {
+            operatorInput = true;
+          }
         }
         break;
     }
@@ -110,17 +103,23 @@ function updateDisplay(event) {
 }
 
 /**
- * Finds the first operator in the string to assign as the operator.
- * @returns {String or Number} The operator if one is found, otherwise returns -1.
+ * Run the binary operation displayed on the calculator.
  */
-function findOperator() {
-  let displayText = displayStr.innerText;
-  for (let i = 0; i <= displayText.length; i++) {
-    if (displayText[i] !== '.' && isNaN(parseFloat(displayText[i]))) {
-      return displayText[i];
-    }
-    return -1;
+function evalEquals() {
+  // Run Calculations
+  let valueArray = displayStr.innerText.split(' ');
+  
+  if (valueArray.length < 3) {
+    return; // Do nothing
   }
+  let newValue = operate(valueArray[1], valueArray[0], valueArray[2]);
+  let strValue = (newValue < 0 ? '-' : '') + String(Math.abs(newValue));
+
+  // Remove the numbers and operators associated with the last operation.
+  displayStr.innerText = displayStr.innerText.replace(' ' + valueArray[1]+ ' ', '');
+  displayStr.innerText = displayStr.innerText.replace(valueArray[0], strValue);
+  displayStr.innerText = displayStr.innerText.replace(valueArray[2], '');
+
 }
 
 let buttons = Array.from(document.querySelectorAll('.numpad-num'));
@@ -129,4 +128,5 @@ buttons.forEach((item) => item.addEventListener('click', updateDisplay));
 
 let decimalInUse = false;
 let lastWasOperator = false;
+let operatorInput = false;
 
