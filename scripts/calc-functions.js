@@ -47,6 +47,8 @@ let displayStr = document.getElementById("current-op-str");
  */
 function clearDisplay() {
   displayStr.innerText = '';
+  decimalInUse = false;
+  operatorInput = false;
 }
 
 /**
@@ -60,7 +62,14 @@ function updateDisplay(event) {
     switch (value) {
       case ".":
         if (!decimalInUse) {
-          displayStr.innerText += value;
+          if (lastWasOperator || displayStr.innerText === "") {
+            console.log(displayStr.innerText);
+            displayStr.innerText += " 0" + value;
+            lastWasOperator = false;
+          }
+          else {
+            displayStr.innerText += value;
+          }
           decimalInUse = true;
         }
         break;
@@ -112,7 +121,7 @@ function evalEquals() {
   if (valueArray.length < 3) {
     return; // Do nothing
   }
-  let newValue = operate(valueArray[1], valueArray[0], valueArray[2]);
+  let newValue = operate(valueArray[1], valueArray[0], valueArray[2]).toFixed(9);
   let strValue = (newValue < 0 ? '-' : '') + String(Math.abs(newValue));
 
   // Remove the numbers and operators associated with the last operation.
