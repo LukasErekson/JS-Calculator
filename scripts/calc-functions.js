@@ -1,5 +1,8 @@
 'using strict';
 
+const ALLOWEDINPUTS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                       '+', '-', '*', '/', '=', '←', '.', 'C']
+
 function add(num1, num2) {
   return +num1 + +num2;
 }
@@ -59,6 +62,11 @@ function clearDisplay() {
 
 function updateDisplay(event) {
   let value = event.target.innerText;
+  console.log(value);
+  if (displayStr.innerText.length > 31 && !(value === "←" || value === "C")) {
+    alert("Not enough room in the calculator. Please try a shorter operation.");
+    return;
+  }
   if (isNaN(parseFloat(value))) {
     switch (value) {
       case ".":
@@ -117,7 +125,10 @@ function updateDisplay(event) {
   }
 
   if (displayStr.innerText.length > 12) {
-    displayStr.style.fontSize = "10pt";
+    displayStr.style.fontSize = "18px";
+  }
+  else {
+    displayStr.style.fontSize = "25px";
   }
 }
 
@@ -154,7 +165,6 @@ function evalEquals() {
  */
 function processKeyPress(event) {
   let pressedKey = {target : {innerText : `${event.key}`}}
-  console.log(event.key);
   // Also let enter evaluate the expression.
   if (event.key === 'Enter') {
     pressedKey.target.innerText = '=';
@@ -162,7 +172,12 @@ function processKeyPress(event) {
   else if (event.key === "Delete") {
     pressedKey.target.innerText = '←';
   }
-  updateDisplay(pressedKey);
+  else if (event.key.toUpperCase() === "C") {
+    clearDisplay();
+  }
+  if (ALLOWEDINPUTS.includes(pressedKey.target.innerText)) {
+    updateDisplay(pressedKey);
+  }
 
 }
 
