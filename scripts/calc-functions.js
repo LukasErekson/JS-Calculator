@@ -49,6 +49,7 @@ function clearDisplay() {
   displayStr.innerText = '';
   decimalInUse = false;
   operatorInput = false;
+  lastWasOperator = false;
 }
 
 /**
@@ -76,6 +77,12 @@ function updateDisplay(event) {
         clearDisplay();
         lastWasOperator = false;
         break;
+      case "←": // Erase
+        displayStr.innerText = displayStr.innerText.trimEnd().slice(0, -1);
+        if (lastWasOperator) {
+          lastWasOperator = false;
+        }
+        break;
       case "=":
         if (!lastWasOperator) {
           evalEquals();
@@ -83,14 +90,15 @@ function updateDisplay(event) {
         break;
       default:
         if (!lastWasOperator) {
-          displayStr.innerText += " " + value;
           // Reset the decimal for the other number.
           decimalInUse = false;
           lastWasOperator = true;
           if (operatorInput) {
+            displayStr.innerText += " " + value;
             evalEquals();
           }
           else {
+            displayStr.innerText += "0 " + value;
             operatorInput = true;
           }
         }
@@ -146,9 +154,13 @@ function evalEquals() {
  */
 function processKeyPress(event) {
   let pressedKey = {target : {innerText : `${event.key}`}}
+  console.log(event.key);
   // Also let enter evaluate the expression.
   if (event.key === 'Enter') {
     pressedKey.target.innerText = '=';
+  }
+  else if (event.key === "Delete") {
+    pressedKey.target.innerText = '←';
   }
   updateDisplay(pressedKey);
 
