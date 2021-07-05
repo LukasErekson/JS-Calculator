@@ -1,5 +1,6 @@
 body {
     font-size: 20px;
+    color: black;
   }
   
   #current-op-str {
@@ -10,10 +11,10 @@ body {
   #calc-wrapper {
     border: 1px solid black;
     border-radius: 10px;
-    background-color: #f9f9f9;
+    background-color: #333;
     width: 325px;
     height: 450px;
-    padding: 5px;
+    overflow: hidden;
     margin: auto;
     display: grid;
     grid-template-areas: "display display display display"
@@ -22,9 +23,10 @@ body {
   }
   
   #calc-display {
+    color: black;
     border: 1px solid black;
     border-radius: 25px;
-    background-color: white;
+    background-color: rgb(230, 230, 230);
     width: 90%;
     height: 64px;
     text-align: right;
@@ -52,16 +54,14 @@ body {
   .numpad-num {
     padding: 10px;
     border: 1px solid black;
-    border-radius: 15px;
-    margin: 5px;
-    background-color: #f0f0f0;
+    background-color: #999;
     text-align: center;
     display: grid;
     align-items: center;
   }
 
   .numpad-num:hover {
-    background-color: #ccc;
+    background-color: #555;
   }
   
   #num-1 {
