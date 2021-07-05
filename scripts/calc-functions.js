@@ -62,7 +62,6 @@ function clearDisplay() {
 
 function updateDisplay(event) {
   let value = event.target.innerText;
-  console.log(value);
   if (displayStr.innerText.length > 31 && !(value === "←" || value === "C")) {
     alert("Not enough room in the calculator. Please try a shorter operation.");
     return;
