@@ -1,11 +1,26 @@
+html {
+  height: 100%;
+}
+
 body {
   font-size: 20px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
   color: black;
+  display: grid;
+  grid-template-rows: 1fr 4fr 1fr;
+  background-color : rgba(34, 148, 255, 1);
+  background: linear-gradient(180deg, rgba(25,15,184,1) 0%, rgba(1,150,255,1) 69%, rgba(34, 148, 255, 1) 100%);
+  background-repeat: no-repeat;
+}
+
+header {
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px black;
 }
 
 #current-op-str {
   font-size: 25px;
-
 }
 
 #calc-wrapper {
@@ -159,4 +174,26 @@ body {
 .operator:hover {
   background-color: rgb(34, 148, 255);
   transition: all .25s ease;
+}
+
+a:visited {
+  color: #eee;
+}
+
+a {
+  text-decoration: none;
+  color: #eee;
+}
+
+footer {
+  color: white;
+  background-color:rgb(34, 148, 255);
+  /* height: 50px;
+  position: absolute;
+  bottom: 0px;
+  width: 100%; */
+  padding: 10px;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
 }
