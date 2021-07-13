@@ -13,7 +13,7 @@ body {
   border-radius: 10px;
   background-color: #333;
   width: 300px;
-  height: 400px;
+  height: 375px;
   overflow: hidden;
   margin: auto;
   display: grid;
@@ -21,7 +21,7 @@ body {
                        "optionPad optionPad optionPad optionPad" 
                        "numpad numpad numpad oppad";
   grid-gap: 5px;
-  grid-template-rows: 2fr, 1fr, 4fr;
+  padding: 5px;
 }
 
 #calc-display {
@@ -56,7 +56,6 @@ body {
 
 .numpad-num {
   padding: 5px;
-  /*     border: 1px solid black; */
   border-radius: 25px;
   background-color: #999;
   text-align: center;
@@ -66,7 +65,15 @@ body {
 }
 
 .numpad-num:hover {
-  cursor:pointer;
+  cursor: pointer;
+  background-color: #555;
+  color: white;
+  text-shadow: 1px 1px black;
+  transition: all .25s ease;
+}
+
+.numpad-press {
+  cursor: pointer;
   background-color: #555;
   color: white;
   text-shadow: 1px 1px black;
@@ -130,6 +137,8 @@ body {
   grid-gap: 5px;
   grid-area: optionPad;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
 }
 
 #equals:hover {

@@ -85,10 +85,11 @@ function updateDisplay(event) {
         lastWasOperator = false;
         break;
       case "←": // Erase
+        console.log(lastWasOperator);
         displayStr.innerText = displayStr.innerText.trimEnd().slice(0, -1);
-        if (lastWasOperator) {
-          lastWasOperator = false;
-        }
+        // Pad end with a space
+        displayStr.innerText.padEnd(displayStr.innerText.length + 1, ' ');
+        lastWasOperator = !lastWasOperator;
         break;
       case "=":
         if (!lastWasOperator) {
