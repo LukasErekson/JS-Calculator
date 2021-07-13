@@ -95,7 +95,7 @@ function updateDisplay(event) {
           evalEquals();
         }
         break;
-      default:
+      default: // Operator (+ - / *)
         if (!lastWasOperator) {
           // Reset the decimal for the other number.
           decimalInUse = false;
@@ -105,10 +105,16 @@ function updateDisplay(event) {
             evalEquals();
           }
           else {
-            displayStr.innerText += "0 " + value;
+            if (displayStr.innerText === '') {
+              displayStr.innerText += "0 " + value;
+            }
+            else {
+              displayStr.innerText += " " + value;
+            }
             operatorInput = true;
           }
         }
+        
         break;
     }
     
@@ -168,7 +174,7 @@ function processKeyPress(event) {
   if (event.key === 'Enter') {
     pressedKey.target.innerText = '=';
   }
-  else if (event.key === "Delete") {
+  else if (event.key === "Delete" || event.key === "Backspace") {
     pressedKey.target.innerText = '←';
   }
   else if (event.key.toUpperCase() === "C") {
@@ -189,4 +195,3 @@ let lastWasOperator = false;
 let operatorInput = false;
 
 document.addEventListener('keypress', processKeyPress);
-
